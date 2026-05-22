@@ -1,2 +1,3 @@
-# ia-em-aries
-horóscopo do dia. muito útil.
+# [ia-em-aries](https://github.com/sombriks/ia-em-aries)
+
+Horóscopo do dia. muito útil.
