@@ -9,11 +9,42 @@
   <link rel="stylesheet" href="the-monospace-web/index.css" />
   <script type="module" src="the-monospace-web/index.js"></script>
   <script type="module" src="web-llm/index.js"></script>
-  <script type="module" src="scripts/index.js"></script>
+  <style>
+    #zodiload {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+  </style>
 </head>
 
 <body>
   <input type="hidden" class="debug-toggle" />
+  <div id="zodiload">
+    <span></span>
+  </div>
+  <script type="module">
+    import { CreateMLCEngine } from "../web-llm/index.js";
+
+    const zodiac = ["♈︎", "♉︎", "♊︎", "♋︎", "♌︎", "♍︎", "♎︎", "♏︎", "♐︎", "♑︎", "♒︎", "♓︎"];
+    const zodiload = document.getElementById("zodiload");
+
+    const model = "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+    // const model = "SmolLM2-135M-Instruct-q0f16-MLC";
+
+    export const engine = await CreateMLCEngine(model, {
+      logLevel: "INFO",
+      initProgressCallback: (progress) => {
+        console.log("Loading progress:", progress);
+        if (zodiac.length > 0) {
+          const symbol = zodiac.shift();
+          zodiload.innerHTML += `<span>${symbol}</span>`;
+        }
+      }
+    });
+  </script>
   {{ content | safe }}
 </body>
 
