@@ -4,4 +4,4 @@ title: IA em Áries
 ---
 # {{title}}
 
-Teste,
+{% include "horoscopo-do-dia.njk" %}

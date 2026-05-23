@@ -3,11 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="assets/icon.png" />
   <title>{{ title }}</title>
-  <script type="text/javascript" src="assets/main.js"></script>
+  <link rel="stylesheet" href="the-monospace-web/reset.css" />
+  <link rel="stylesheet" href="the-monospace-web/index.css" />
+  <script type="module" src="the-monospace-web/index.js"></script>
+  <script type="module" src="web-llm/index.js"></script>
+  <script type="module" src="scripts/index.js"></script>
 </head>
 
 <body>
+  <input type="hidden" class="debug-toggle" />
   {{ content | safe }}
 </body>
 

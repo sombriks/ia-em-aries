@@ -1,32 +1,17 @@
-import EleventyVitePlugin from "@11ty/eleventy-plugin-vite";
-
 /**
  * @param {import("@11ty/eleventy/UserConfig").default} config
  */
 export default function (config) {
-  // basic directories
-  config.setInputDirectory('./src/pages');
-  config.setLayoutsDirectory("../components");
+  // basic di rectories
+  config.setInputDirectory('src/pages');
+  config.setIncludesDirectory("../components");
   config.setLayoutsDirectory("../layouts");
-  config.setOutputDirectory('./dist');
-
-  config.addPlugin(EleventyVitePlugin, {
-    viteOptions: {
-      server: {
-        mode: "development",
-        middlewareMode: true,
-        watch: ["./src/scripts/**"] // not working
-      },
-      build: {
-        rolldownOptions: {
-          input: {
-            main: "./src/scripts/index.js"
-          },
-          output: {
-            entryFileNames: "assets/[name].js" // not refreshing
-          },
-        }
-      }
-    }
-  });
+  // client-side resources
+  config.addPassthroughCopy({ "src/assets": "assets" });
+  config.addPassthroughCopy({ "src/scripts": "scripts" });
+  // exposed libraries
+  config.addPassthroughCopy({ "node_modules/@mlc-ai/web-llm/lib": "web-llm" });
+  config.addPassthroughCopy({ "node_modules/@owickstrom/the-monospace-web/src": "the-monospace-web" });
+  // output
+  config.setOutputDirectory('dist');
 }

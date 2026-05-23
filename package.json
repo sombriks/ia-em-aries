@@ -2,11 +2,12 @@
   "type": "module",
   "scripts": {
     "dev": "eleventy --serve --incremental",
-    "build": "eleventy"
+    "build": "eleventy",
+    "prebuild": "rm -rf dist"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
-    "@11ty/eleventy-plugin-vite": "^8.0.0-alpha.2",
-    "@mlc-ai/web-llm": "^0.2.83"
+    "@mlc-ai/web-llm": "^0.2.83",
+    "@owickstrom/the-monospace-web": "^0.1.5"
   }
 }
