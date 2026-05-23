@@ -1,6 +1,7 @@
 ---
 layout: base.njk
+title: IA em Áries
 ---
-# IA em Áries
+# {{title}}
 
-Teste
+Teste,
