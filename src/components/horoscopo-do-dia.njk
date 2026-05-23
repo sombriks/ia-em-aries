@@ -5,11 +5,10 @@
 <script type="module">
   import { engine } from "./scripts/index.js";
   const response = await engine.chat.completions.create({
-    model: "Llama-3.2-1B-Instruct-q4f16_1-MLC",
     messages: [
       {
-        role: "tool",
-        content: "Você é um astrólogo especializado em horóscopos diários. Forneça um horóscopo detalhado e positivo para o signo de Áries, incluindo conselhos práticos para o dia."
+        role: "user",
+        content: `Você é um astrólogo especializado em horóscopos diários. Forneça um horóscopo detalhado e positivo para o signo de Áries, incluindo conselhos práticos para o dia de hoje, ${new Date().toISOString().split('T')[0]}. Mantenha o tom otimista e encorajador, destacando as oportunidades e desafios que Áries pode enfrentar. Certifique-se de incluir dicas sobre amor, carreira e saúde, e termine com uma mensagem inspiradora para motivar os arianos a aproveitarem ao máximo o dia.`
       }
     ]
   });
