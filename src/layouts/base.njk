@@ -10,18 +10,26 @@
   <script type="module" src="the-monospace-web/index.js"></script>
   <script type="module" src="web-llm/index.js"></script>
   <style>
-    #zodiload {
+    #zodiload,
+    #spirit {
       display: flex;
       gap: 0.5rem;
       font-size: 2.5rem;
       margin-bottom: 1rem;
       justify-content: center;
     }
+
+    #spirit {
+      font-style: italic;
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
   </style>
 </head>
 
 <body>
   <input type="hidden" class="debug-toggle" />
+  <div id="spirit"> - </div>
   <div id="zodiload">
     <span></span>
   </div>

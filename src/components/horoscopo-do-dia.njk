@@ -1,16 +1,37 @@
 <div>
   <h2>Horóscopo do Dia</h2>
-  <p id="fortune">Baixando um espírito...</p>
+  <p id="fortune">Baixando um espírito astrológico...</p>
+  <button id="refresh" onclick="location.reload()" style="display: none;">Atualizar Horóscopo</button>
 </div>
 <script type="module">
   import { engine } from "./scripts/index.js";
+  // referências ao template
+  const fortune = document.getElementById("fortune");
+  const refreshButton = document.getElementById("refresh");
+  // prepara
+  fortune.innerHTML = "Consultando os astros para Áries...";
+  // chama o modelo
   const response = await engine.chat.completions.create({
+    stream: true,
     messages: [
       {
         role: "user",
-        content: `Você é um astrólogo especializado em horóscopos diários. Forneça um horóscopo detalhado e positivo para o signo de Áries, incluindo conselhos práticos para o dia de hoje, ${new Date().toISOString().split('T')[0]}. Mantenha o tom otimista e encorajador, destacando as oportunidades e desafios que Áries pode enfrentar. Certifique-se de incluir dicas sobre amor, carreira e saúde, e termine com uma mensagem inspiradora para motivar os arianos a aproveitarem ao máximo o dia.`
+        content: `Você é um astrólogo especializado em horóscopos diários. 
+                  Forneça um horóscopo detalhado e positivo para o signo de
+                  Áries, incluindo conselhos práticos para o dia de hoje,
+                  ${new Date().toISOString().split('T')[0]}. Mantenha o tom
+                  otimista e encorajador, destacando as oportunidades e desafios
+                  que Áries pode enfrentar. Certifique-se de incluir dicas sobre
+                  amor, carreira e saúde, e termine com uma mensagem inspiradora
+                  para motivar os arianos a aproveitarem ao máximo o dia.
+                  Formate a mensagem em texto plano.`
       }
     ]
   });
-  document.getElementById("fortune").textContent = response.choices[0].message.content;
+  fortune.innerHTML = "";
+  for await (const chunk of response) {
+    const text = chunk.choices[0]?.delta?.content || '';
+    fortune.innerHTML += text;
+  }
+  refreshButton.style.display = "block";
 </script>
